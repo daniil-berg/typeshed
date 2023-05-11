@@ -92,7 +92,7 @@ class Worksheet(_WorkbookChild):
     def __getitem__(self, key: int) -> tuple[Cell, ...]: ...
     # A slice is necessarily a row or rows, even if targetting a single cell
     @overload
-    def __getitem__(self, key: slice) -> tuple[Any, ...]: ...  # tuple[AnyOf[Cell, tuple[Cell, ...]]]
+    def __getitem__(self, key: slice[int | None, int | None, int | None]) -> tuple[Any, ...]: ...  # tuple[AnyOf[Cell, tuple[Cell, ...]]]
     # A str could be an individual cell, row, column or full range
     @overload
     def __getitem__(self, key: str) -> Any: ...  # AnyOf[Cell, tuple[Cell, ...], tuple[tuple[Cell, ...], ...]]

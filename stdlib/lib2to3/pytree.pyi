@@ -113,5 +113,5 @@ class NegatedPattern(BasePattern):
     def __init__(self, content: str | None = None) -> None: ...
 
 def generate_matches(
-    patterns: SupportsGetItem[int | slice, BasePattern] | None, nodes: SupportsGetItem[int | slice, _NL]
+    patterns: SupportsGetItem[int | slice[int | None, int | None, int | None], BasePattern] | None, nodes: SupportsGetItem[int | slice[int | None, int | None, int | None], _NL]
 ) -> Iterator[tuple[int, _Results]]: ...

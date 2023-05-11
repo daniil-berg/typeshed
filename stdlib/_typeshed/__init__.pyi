@@ -281,7 +281,7 @@ WriteableBuffer: TypeAlias = Buffer
 ReadableBuffer: TypeAlias = Buffer  # stable
 
 class SliceableBuffer(Buffer, Protocol):
-    def __getitem__(self, slice: slice, /) -> Sequence[int]: ...
+    def __getitem__(self, slice: slice[int | None, int | None, int | None], /) -> Sequence[int]: ...
 
 class IndexableBuffer(Buffer, Protocol):
     def __getitem__(self, i: int, /) -> int: ...
@@ -289,7 +289,7 @@ class IndexableBuffer(Buffer, Protocol):
 class SupportsGetItemBuffer(SliceableBuffer, IndexableBuffer, Protocol):
     def __contains__(self, x: Any, /) -> bool: ...
     @overload
-    def __getitem__(self, slice: slice, /) -> Sequence[int]: ...
+    def __getitem__(self, slice: slice[int | None, int | None, int | None], /) -> Sequence[int]: ...
     @overload
     def __getitem__(self, i: int, /) -> int: ...
 
@@ -352,6 +352,8 @@ class DataclassInstance(Protocol):
 # Anything that can be passed to the int/float constructors
 ConvertibleToInt: TypeAlias = str | ReadableBuffer | SupportsInt | SupportsIndex | SupportsTrunc
 ConvertibleToFloat: TypeAlias = str | ReadableBuffer | SupportsFloat | SupportsIndex
+
+IndexSlice: TypeAlias = slice[SupportsIndex | None, SupportsIndex | None, SupportsIndex | None]
 
 # A few classes updated from Foo(str, Enum) to Foo(StrEnum). This is a convenience so these
 # can be accurate on all python versions without getting too wordy
